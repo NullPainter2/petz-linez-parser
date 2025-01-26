@@ -6,6 +6,14 @@ public class Program
         public int Y = 0;
         public string ID = "";
 
+        /*
+        EXAMPLE:
+        
+        [Eyes]
+        12, 34			RightEye/leftEye
+        28, 56 			RightIris/leftIris
+
+        */
         public static LinezEye FromLine(string str)
         {
             var parts = str.Split(
@@ -111,6 +119,10 @@ public class Program
         var parsed = new LNZ();
 
         parsed.Parse(FILE);
+
+        //
+        // Print the result ...
+        //
 
         foreach (var eye in parsed.Eyes)
         {
