@@ -57,11 +57,13 @@ public class Program
             {
                 Console.WriteLine("Parsing line '" + lines[lineIndex] + '"');
 
-                if (lines[lineIndex].Trim().Equals("[Eyes]"))
+                var line = lines[lineIndex].Trim();
+
+                if (line.Equals("[Eyes]"))
                 {
-                    ForEachLine((line) =>
+                    ForeachRowInSection((row) =>
                     {
-                        var eye = LinezEye.FromLine(line);
+                        var eye = LinezEye.FromLine(row);
                         if (eye != null)
                         {
                             Eyes.Add(eye);
@@ -75,7 +77,7 @@ public class Program
             }
         }
         
-        void ForEachLine(Action<string> LineCallback, string[] lines, ref int lineIndex)
+        void ForeachRowInSection(Action<string> LineCallback, string[] lines, ref int lineIndex)
         {
             // next line
             lineIndex++;
