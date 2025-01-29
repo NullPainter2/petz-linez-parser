@@ -11,14 +11,14 @@ class LNZ
 
         parser.Init(fileName);
 
-        string line = "";
-        while(parser.GetLine(ref line))
+        string sectionName = "";
+        while(parser.GetSection(ref sectionName))
         {
-            if (line.StartsWith("[Eyes]"))
+            if (sectionName == "[Eyes]")
             {
                 parser.ParseSection(Eyes);
             }
-            else if (line.StartsWith("[Paint Ballz]"))
+            else if (sectionName == "[Paint Ballz]")
             {
                 parser.ParseSection(PaintBallz);
             }
@@ -46,6 +46,10 @@ class LNZ
              // }
             else
             {
+                // ignore this section
+                
+                Console.WriteLine(String.Format("{0} skipped ...",sectionName));
+                
                 parser.NextLine();
             }
         }

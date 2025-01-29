@@ -10,13 +10,13 @@ public class Program
 
         // Print the result ...
 
-        Console.WriteLine("EYES");
+        Console.WriteLine(String.Format("EYES #{0}",parsed.Eyes.Count));
         foreach (var item in parsed.Eyes)
         {
             Print(item);
         }
 
-        Console.WriteLine("PAINT BALLS");
+        Console.WriteLine("PAINT BALLS #{0}",parsed.PaintBallz.Count);
         foreach (var item in parsed.PaintBallz)
         {
             Print(item);

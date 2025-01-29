@@ -1,5 +1,26 @@
 ﻿using main.parsing;
 
+/*
+ 
+EXAMPLE:
+ 
+     LnzParser parser = new LnzParser();
+
+    parser.Init(fileName);
+
+    string sectionName = "";
+    while(parser.GetSection(ref sectionName))
+    {
+        if (sectionName == "[Eyes]")
+        {
+            parser.ParseSection(Eyes);
+        }
+        else if (sectionName == "[Paint Ballz]")
+        {
+            parser.ParseSection(PaintBallz);
+        }
+ */
+
 public class LnzParser
 {
     int lineIndex = 0;
@@ -11,6 +32,11 @@ public class LnzParser
         lineIndex = 0;
     }
     
+    /// /////////////////////////////////////////////////////////////
+    ///
+    /// lowest level api
+    ///
+    /////////////////////////////////////////////////////////////////
     public bool GetLine(ref string line)
     {
         if (lineIndex >= lines.Length)
@@ -27,10 +53,12 @@ public class LnzParser
     {
         lineIndex++;
     }
+    
+    /////////////////////////////////////////////////////////////////
         
     public void ParseSection<T>(List<T> outList) where T : class, new()
     {
-        ForeachRowInSection((row) =>
+        _ForeachRowInSection((row) =>
         {
             var item = LnzAttributeParser.FromLine<T>(row);
             if (item != null)
@@ -39,17 +67,67 @@ public class LnzParser
             }
         });
     }
-    
-    void ForeachRowInSection(Action<string> LineCallback)
+
+    public bool GetSection(ref string sectionName)
     {
-        // next line
+        for (; lineIndex < lines.Length; lineIndex++)
+        {
+            string line = _GetCleanName( lines[lineIndex] );
+
+            if (line.Length == 0)
+            {
+                continue;
+            }
+
+            if (line[0] == '[')
+            {
+                // clean the line
+
+                // skip comments
+                
+
+                
+                // valid name
+
+                sectionName = line;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    string _GetCleanName(string line)
+    {
+        // strip comments
+        
+        int commentIndex = -1;
+        foreach (var comment in new string[]{"//", ";", "#"})
+        {
+            commentIndex= line.IndexOf(comment, 0, StringComparison.Ordinal);
+            if (commentIndex != -1)
+            {
+                line = line.Substring(0, commentIndex);
+                line = line.Trim();
+            }
+        }
+        
+        // trim whitespace
+                
+        line = line.Trim();
+
+        return line;
+    }
+    
+    void _ForeachRowInSection(Action<string> LineCallback)
+    {
+        // we are at section, so next line
         lineIndex++;
 
         while (lineIndex < lines.Length)
         {
-            string line = lines[lineIndex].Trim();
-
-            // Console.WriteLine("Parsing item ... '" + lines[lineIndex] + '"');
+            string line = _GetCleanName(lines[lineIndex]);
 
             // skip empty lines
             bool isEmptyLine = line.Length == 0;
@@ -60,17 +138,14 @@ public class LnzParser
                 continue;
             }
 
+            // is next section?
             bool nextEntry = line[0] == '[';
             if (nextEntry)
             {
-                return; // all items are parsed, keep the current line index
+                return; // all items of section are parsed, keep the current line index
             }
 
-            bool isComment = line[0] == ';' || line[0] == '#' || line.StartsWith("//");
-            if (!isComment)
-            {
-                LineCallback(line);
-            }
+            LineCallback(line);
 
             lineIndex++; // next line
         }
