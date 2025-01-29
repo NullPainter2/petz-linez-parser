@@ -2,8 +2,8 @@
 
 class LNZ
 {
-    public List<Eye> Eyes = new List<Eye>();
-    public List<PaintBall> PaintBallz = new List<PaintBall>();
+    public List<Eye> eyez = new List<Eye>();
+    public List<PaintBall> paintBallz = new List<PaintBall>();
 
     public void Parse(string fileName)
     {
@@ -16,11 +16,11 @@ class LNZ
         {
             if (sectionName == "[Eyes]")
             {
-                parser.ParseSection(Eyes);
+                parser.ParseSection(eyez);
             }
             else if (sectionName == "[Paint Ballz]")
             {
-                parser.ParseSection(PaintBallz);
+                parser.ParseSection(paintBallz);
             }
              // else if (line.StartsWith("[Paint Ballz]"))
              // {
