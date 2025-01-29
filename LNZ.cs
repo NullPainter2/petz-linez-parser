@@ -12,7 +12,7 @@ class LNZ
         parser.Init(fileName);
 
         string sectionName = "";
-        while(parser.GetSection(ref sectionName))
+        while (parser.GetSection(ref sectionName))
         {
             if (sectionName == "[Eyes]")
             {
@@ -22,37 +22,36 @@ class LNZ
             {
                 parser.ParseSection(paintBallz);
             }
-             // else if (line.StartsWith("[Paint Ballz]"))
-             // {
-             //     ForeachRowInSection((row) =>
-             //     {
-             //         var item = LnzAttributeParser.FromLine<PaintBall>(row);
-             //         if (item != null)
-             //         {
-             //             PaintBallz.Add(item);
-             //         }
-             //     }, lines, ref lineIndex);
-             // }
-             // else if (line.StartsWith("[Eyes]"))
-             // {
-             //     ForeachRowInSection((row) =>
-             //     {
-             //         var eye = Eye.FromLine(row);
-             //         if (eye != null)
-             //         {
-             //             Eyes.Add(eye);
-             //         }
-             //     }, lines, ref lineIndex);
-             // }
+            // else if (line.StartsWith("[Paint Ballz]"))
+            // {
+            //     ForeachRowInSection((row) =>
+            //     {
+            //         var item = LnzAttributeParser.FromLine<PaintBall>(row);
+            //         if (item != null)
+            //         {
+            //             PaintBallz.Add(item);
+            //         }
+            //     }, lines, ref lineIndex);
+            // }
+            // else if (line.StartsWith("[Eyes]"))
+            // {
+            //     ForeachRowInSection((row) =>
+            //     {
+            //         var eye = Eye.FromLine(row);
+            //         if (eye != null)
+            //         {
+            //             Eyes.Add(eye);
+            //         }
+            //     }, lines, ref lineIndex);
+            // }
             else
             {
                 // ignore this section
-                
-                Console.WriteLine(String.Format("{0} skipped ...",sectionName));
-                
+
+                Console.WriteLine(String.Format("{0} skipped ...", sectionName));
+
                 parser.NextLine();
             }
         }
     }
-
 };

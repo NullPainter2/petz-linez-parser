@@ -10,13 +10,13 @@ public class Program
 
         // Print the result ...
 
-        Console.WriteLine(String.Format("EYES #{0}",parsed.eyez.Count));
+        Console.WriteLine(String.Format("EYES #{0}", parsed.eyez.Count));
         foreach (var item in parsed.eyez)
         {
             Print(item);
         }
 
-        Console.WriteLine("PAINT BALLS #{0}",parsed.paintBallz.Count);
+        Console.WriteLine("PAINT BALLS #{0}", parsed.paintBallz.Count);
         foreach (var item in parsed.paintBallz)
         {
             Print(item);
@@ -32,11 +32,10 @@ public class Program
             var value = field.GetValue(obj);
 
             // @note C# handles printing of numerics.Vector3 too!
-            
+
             Console.Write(String.Format("{0} = '{2}', ", fieldName, fieldType, value));
         }
 
         Console.WriteLine();
     }
-    
 }

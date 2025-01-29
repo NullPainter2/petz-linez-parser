@@ -1,9 +1,9 @@
 ﻿using main.parsing;
 
 /*
- 
+
 EXAMPLE:
- 
+
      LnzParser parser = new LnzParser();
 
     parser.Init(fileName);
@@ -18,7 +18,7 @@ EXAMPLE:
         else if (sectionName == "[Paint Ballz]")
         {
             parser.ParseSection(PaintBallzList); // stores values into the List
-        }        
+        }
 
         // skip to next line (parser doesn't auto advance
 
@@ -35,7 +35,7 @@ public class LnzParser
         lines = File.ReadAllLines(fileName);
         lineIndex = 0;
     }
-    
+
     /// /////////////////////////////////////////////////////////////
     ///
     /// lowest level api
@@ -47,7 +47,7 @@ public class LnzParser
         {
             return false;
         }
-        
+
         line = lines[lineIndex].Trim();
 
         return true;
@@ -57,9 +57,9 @@ public class LnzParser
     {
         lineIndex++;
     }
-    
+
     /////////////////////////////////////////////////////////////////
-        
+
     public void ParseSection<T>(List<T> outList) where T : class, new()
     {
         _ForeachRowInSection((row) =>
@@ -76,7 +76,7 @@ public class LnzParser
     {
         for (; lineIndex < lines.Length; lineIndex++)
         {
-            string line = _GetCleanName( lines[lineIndex] );
+            string line = _GetCleanName(lines[lineIndex]);
 
             if (line.Length == 0)
             {
@@ -88,9 +88,8 @@ public class LnzParser
                 // clean the line
 
                 // skip comments
-                
 
-                
+
                 // valid name
 
                 sectionName = line;
@@ -105,25 +104,25 @@ public class LnzParser
     string _GetCleanName(string line)
     {
         // strip comments
-        
+
         int commentIndex = -1;
-        foreach (var comment in new string[]{"//", ";", "#"})
+        foreach (var comment in new string[] { "//", ";", "#" })
         {
-            commentIndex= line.IndexOf(comment, 0, StringComparison.Ordinal);
+            commentIndex = line.IndexOf(comment, 0, StringComparison.Ordinal);
             if (commentIndex != -1)
             {
                 line = line.Substring(0, commentIndex);
                 line = line.Trim();
             }
         }
-        
+
         // trim whitespace
-                
+
         line = line.Trim();
 
         return line;
     }
-    
+
     void _ForeachRowInSection(Action<string> LineCallback)
     {
         // we are at section, so next line
