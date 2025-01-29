@@ -31,7 +31,7 @@ public class Program
             var fieldName = field.Name;
             var value = field.GetValue(obj);
 
-            // @note C# handles printing of Vector3 too!
+            // @note C# handles printing of numerics.Vector3 too!
             
             Console.Write(String.Format("{0} = '{2}', ", fieldName, fieldType, value));
         }
