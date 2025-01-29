@@ -21,12 +21,8 @@ Also repo contains fallback to simpler parsing, in backup branch and comments.
 ![chrome_DypBVW0tqc](https://github.com/user-attachments/assets/4c15d10a-50bc-40c5-a8ed-8b9746acd22f)
 
 ## parse that into List
-
-![chrome_NJsWD2fO4X](https://github.com/user-attachments/assets/78dddf83-0e84-4a89-b27d-f29f7e210b84)
+![chrome_RqgoC5i1Sx](https://github.com/user-attachments/assets/a7e2e84e-a731-4d54-a79e-a02b2c116998)
 
 ## and print it
-
-![chrome_ceHp9VCcmn](https://github.com/user-attachments/assets/d8d4452f-fb4d-4ed9-8dde-1b4bf5389d55)
-![rider64_JG660gb9UX](https://github.com/user-attachments/assets/22e10e81-5622-4b49-bd06-41c165529468)
-
-
+![chrome_7QVNwKaJDs](https://github.com/user-attachments/assets/9568caca-6e9d-4c36-98cf-05c46f136c79)
+![rider64_Hbcf2dduVx](https://github.com/user-attachments/assets/6456c1ce-b4df-4de3-8545-6b37f5c69c86)
