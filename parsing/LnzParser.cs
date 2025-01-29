@@ -2,7 +2,33 @@
 
 public class LnzParser
 {
-    public static void ParseLineToList<T>(string[] lines, List<T> outList, ref int lineIndex) where T : class, new()
+    int lineIndex = 0;
+    string[] lines;
+
+    public void Init(string fileName)
+    {
+        lines = File.ReadAllLines(fileName);
+        lineIndex = 0;
+    }
+    
+    public bool GetLine(ref string line)
+    {
+        if (lineIndex >= lines.Length)
+        {
+            return false;
+        }
+        
+        line = lines[lineIndex].Trim();
+
+        return true;
+    }
+
+    public void NextLine()
+    {
+        lineIndex++;
+    }
+        
+    public void ParseSection<T>(List<T> outList) where T : class, new()
     {
         ForeachRowInSection((row) =>
         {
@@ -11,10 +37,10 @@ public class LnzParser
             {
                 outList.Add(item);
             }
-        }, lines, ref lineIndex);
+        });
     }
     
-    static void ForeachRowInSection(Action<string> LineCallback, string[] lines, ref int lineIndex)
+    void ForeachRowInSection(Action<string> LineCallback)
     {
         // next line
         lineIndex++;

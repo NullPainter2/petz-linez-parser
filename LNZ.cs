@@ -7,20 +7,20 @@ class LNZ
 
     public void Parse(string fileName)
     {
-        var lines = File.ReadAllLines(fileName);
+        LnzParser parser = new LnzParser();
 
-        int lineIndex = 0;
-        while (lineIndex < lines.Length)
+        parser.Init(fileName);
+
+        string line = "";
+        while(parser.GetLine(ref line))
         {
-            var line = lines[lineIndex].Trim();
-
             if (line.StartsWith("[Eyes]"))
             {
-                LnzParser.ParseLineToList(lines, Eyes, ref lineIndex);
+                parser.ParseSection(Eyes);
             }
             else if (line.StartsWith("[Paint Ballz]"))
             {
-                LnzParser.ParseLineToList(lines, PaintBallz, ref lineIndex);
+                parser.ParseSection(PaintBallz);
             }
              // else if (line.StartsWith("[Paint Ballz]"))
              // {
@@ -46,7 +46,7 @@ class LNZ
              // }
             else
             {
-                lineIndex++;
+                parser.NextLine();
             }
         }
     }
