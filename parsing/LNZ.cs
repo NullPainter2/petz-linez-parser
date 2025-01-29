@@ -12,11 +12,7 @@ class LNZ
         int lineIndex = 0;
         while (lineIndex < lines.Length)
         {
-            // Console.WriteLine("Parsing line '" + lines[lineIndex] + '"');
-
             var line = lines[lineIndex].Trim();
-
-            // https://homebody.eu/carolyn/downloabx/tutorials/tutorialbits/LNZ3rd.txt
 
             if (line.StartsWith("[Eyes]"))
             {
