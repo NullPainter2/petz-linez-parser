@@ -2,7 +2,7 @@
 
 namespace main.parsing;
 
-// if field has this attribute then parse
+// Attribute so we know what fields to parse ... 
 
 public class LnzItem : Attribute
 {
