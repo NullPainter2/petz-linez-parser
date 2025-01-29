@@ -2,7 +2,7 @@
 
 public class LnzParser
 {
-    public static void ParseList<T>(string[] lines, List<T> outList, ref int lineIndex) where T : class, new()
+    public static void ParseLineToList<T>(string[] lines, List<T> outList, ref int lineIndex) where T : class, new()
     {
         ForeachRowInSection((row) =>
         {

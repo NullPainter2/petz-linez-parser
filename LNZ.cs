@@ -16,11 +16,11 @@ class LNZ
 
             if (line.StartsWith("[Eyes]"))
             {
-                LnzParser.ParseList(lines, Eyes, ref lineIndex);
+                LnzParser.ParseLineToList(lines, Eyes, ref lineIndex);
             }
             else if (line.StartsWith("[Paint Ballz]"))
             {
-                LnzParser.ParseList(lines, PaintBallz, ref lineIndex);
+                LnzParser.ParseLineToList(lines, PaintBallz, ref lineIndex);
             }
              // else if (line.StartsWith("[Paint Ballz]"))
              // {
