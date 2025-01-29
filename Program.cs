@@ -14,14 +14,12 @@ public class Program
         foreach (var item in parsed.Eyes)
         {
             Print(item);
-            // Console.WriteLine("eye = {0},{1},{2}", eye.X, eye.Y, eye.ID);
         }
 
         Console.WriteLine("PAINT BALLS");
         foreach (var item in parsed.PaintBallz)
         {
             Print(item);
-            //Console.WriteLine("eye = {0},{1},{2}", eye.X, eye.Y, eye.ID);
         }
     }
 
