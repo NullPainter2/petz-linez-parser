@@ -1,122 +1,24 @@
 public class Program
 {
-    class LinezEye
+
+    public static void Print<T>(T obj)
     {
-        public int X = 0;
-        public int Y = 0;
-        public string ID = "";
-
-        /*
-        EXAMPLE:
+        foreach (var field in obj.GetType().GetFields())
+        {
+            var fieldType = field.FieldType.GetType().Name;
+            var fieldName = field.Name;
+            var value = field.GetValue(obj);
         
-        [Eyes]
-        12, 34			RightEye/leftEye
-        28, 56 			RightIris/leftIris
-
-        */
-        public static LinezEye FromLine(string str)
-        {
-            var parts = str.Split(
-                new char[] { ' ', '\t', ',' },
-                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
-            );
-
-            if (parts.Length != 3)
-            {
-                return null;
-            }
-
-            var result = new LinezEye();
-            
-            if (!int.TryParse(parts[0], out result.X))
-            {
-                return null;
-            }
-
-            if (!int.TryParse(parts[1], out result.Y))
-            {
-                return null;
-            }
-
-            result.ID = parts[2];
-
-            return result;
+            Console.Write(String.Format("{0} = '{2}', ", fieldName, fieldType, value));
         }
-    };
-    
-    class LNZ
-    {
-        public List<LinezEye> Eyes = new List<LinezEye>();
 
-        public void Parse(string fileName)
-        {
-            var lines = File.ReadAllLines(fileName);
+        Console.WriteLine();
+    }
 
-            int lineIndex = 0;
-            while (lineIndex < lines.Length) // for (int i = 0; i < lines.Length;)
-            {
-                Console.WriteLine("Parsing line '" + lines[lineIndex] + '"');
-
-                var line = lines[lineIndex].Trim();
-
-                if (line.Equals("[Eyes]"))
-                {
-                    ForeachRowInSection((row) =>
-                    {
-                        var eye = LinezEye.FromLine(row);
-                        if (eye != null)
-                        {
-                            Eyes.Add(eye);
-                        }
-                    }, lines, ref lineIndex);
-                }
-                else
-                {
-                    lineIndex++;
-                }
-            }
-        }
-        
-        void ForeachRowInSection(Action<string> LineCallback, string[] lines, ref int lineIndex)
-        {
-            // next line
-            lineIndex++;
-
-            while (lineIndex < lines.Length)
-            {
-                string line = lines[lineIndex].Trim();
-
-                Console.WriteLine("Parsing item ... '" + lines[lineIndex] + '"');
-
-                // skip empty lines
-                bool isEmptyLine = line.Length == 0;
-                if (isEmptyLine)
-                {
-                    lineIndex++;
-
-                    continue;
-                }
-
-                bool nextEntry = line[0] == '[';
-                if (nextEntry)
-                {
-                    return; // all items are parsed, keep the current line index
-                }
-
-                bool isComment = line[0] == ';';
-                if (!isComment)
-                {
-                    LineCallback(line);
-                }
-
-                lineIndex++; // next line
-            }
-        }
-    };
 
     public static void Main()
     {
-        var FILE = "YellowBird.lnz";
+        var FILE = "calico-petz3.lnz";//"YellowBird.lnz";
 
         var parsed = new LNZ();
 
@@ -126,13 +28,24 @@ public class Program
         // Print the result ...
         //
 
-        foreach (var eye in parsed.Eyes)
+        Console.WriteLine("EYES");
+        foreach (var item in parsed.Eyes)
         {
-            Console.WriteLine("eye = {0},{1},{2}",eye.X, eye.Y, eye.ID);
+            Print(item);
+            // Console.WriteLine("eye = {0},{1},{2}", eye.X, eye.Y, eye.ID);
         }
-        
-        if (true) // @debug to put breakpoint
+
+        Console.WriteLine("PAINT BALLS");
+        foreach (var item in parsed.PaintBallz)
         {
+            Print(item);
+            //Console.WriteLine("eye = {0},{1},{2}", eye.X, eye.Y, eye.ID);
         }
+
+        // foreach (var item in parsed.PaintBall_InterfaceVariants)
+        // {
+        //     Print(item);
+        //     //Console.WriteLine("eye = {0},{1},{2}", eye.X, eye.Y, eye.ID);
+        // }
     }
 }
