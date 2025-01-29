@@ -2,7 +2,7 @@
 
 namespace main.parsing;
 
-// if field has this attribute then parse
+// Attribute so we know what fields to parse ... 
 
 public class LnzItem : Attribute
 {
@@ -34,6 +34,8 @@ public static class LnzAttributeParser
         // rowParser.Int(ref result.Texture);
         // return result;
 
+        // iterate trough all field names of class T
+        
         foreach (var field in result.GetType().GetFields())
         {
             var fieldName = field.Name;
@@ -43,6 +45,9 @@ public static class LnzAttributeParser
             
             if (Attribute.GetCustomAttribute(field, typeof(LnzItem)) != null)
             {
+
+                // save item based on whatever type the field has
+                
                 switch (typeName)
                 {
                     case "Single":
