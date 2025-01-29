@@ -2,10 +2,13 @@
 
 namespace main.parsing;
 
+// if field has this attribute then parse
+
 public class LnzItem : Attribute
 {
     public LnzItem()
     {
+        // @todo add validations, re-ordering, ...
     }
 }
 
@@ -36,7 +39,8 @@ public static class LnzAttributeParser
             var fieldName = field.Name;
             var typeName = field.FieldType.Name;
 
-            // marked for parsing?
+            // is line marked for parsing?
+            
             if (Attribute.GetCustomAttribute(field, typeof(LnzItem)) != null)
             {
                 switch (typeName)
