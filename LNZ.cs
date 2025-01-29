@@ -22,36 +22,15 @@ class LNZ
             {
                 parser.ParseSection(paintBallz);
             }
-            // else if (line.StartsWith("[Paint Ballz]"))
-            // {
-            //     ForeachRowInSection((row) =>
-            //     {
-            //         var item = LnzAttributeParser.FromLine<PaintBall>(row);
-            //         if (item != null)
-            //         {
-            //             PaintBallz.Add(item);
-            //         }
-            //     }, lines, ref lineIndex);
-            // }
-            // else if (line.StartsWith("[Eyes]"))
-            // {
-            //     ForeachRowInSection((row) =>
-            //     {
-            //         var eye = Eye.FromLine(row);
-            //         if (eye != null)
-            //         {
-            //             Eyes.Add(eye);
-            //         }
-            //     }, lines, ref lineIndex);
-            // }
             else
             {
-                // ignore this section
+                // section is ignored ...
 
                 Console.WriteLine(String.Format("{0} skipped ...", sectionName));
-
-                parser.NextLine();
             }
+
+            // parser doesn't auto advance
+            parser.NextLine();
         }
     }
-};
+}
