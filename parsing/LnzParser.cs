@@ -13,12 +13,16 @@ EXAMPLE:
     {
         if (sectionName == "[Eyes]")
         {
-            parser.ParseSection(Eyes);
+            parser.ParseSection(EyesList); // stores values into the List
         }
         else if (sectionName == "[Paint Ballz]")
         {
-            parser.ParseSection(PaintBallz);
-        }
+            parser.ParseSection(PaintBallzList); // stores values into the List
+        }        
+
+        // skip to next line (parser doesn't auto advance
+
+        parser.NextLine();
  */
 
 public class LnzParser
