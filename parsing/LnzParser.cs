@@ -64,7 +64,7 @@ public class LnzParser
     {
         _ForeachRowInSection((row) =>
         {
-            var item = LnzAttributeParser.FromLine<T>(row);
+            T item = LnzAttributeParser.FromLine<T>(row);
             if (item != null)
             {
                 outList.Add(item);
