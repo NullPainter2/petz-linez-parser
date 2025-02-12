@@ -85,13 +85,6 @@ public class LnzParser
 
             if (line[0] == '[')
             {
-                // clean the line
-
-                // skip comments
-
-
-                // valid name
-
                 sectionName = line;
 
                 return true;
