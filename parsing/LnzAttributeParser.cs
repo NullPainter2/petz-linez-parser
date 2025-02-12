@@ -2,40 +2,27 @@
 
 namespace main.parsing;
 
-// Attribute so we know what fields to parse ... 
-
 public class LnzItem : Attribute
 {
     public LnzItem()
     {
-        // @todo add validations, re-ordering, ...
     }
 }
 
 public static class LnzAttributeParser
 {
-    // @note  C# want's to be explicit with type handling ...  `new()` means we use `new`, class is to allow to return `null` 
+    // @note  C# want's to be explicit with type handling of T
+    // - `new()` means we use `new`
+    // - `class` is to allow to return `null` 
 
     public static T FromLine<T>(string line) where T : class, new()
     {
         var result = new T();
 
         LnzRowParser rowParser = new LnzRowParser(line);
-
-        // Used to have reference for parsing :
-        //
-        // rowParser.Percentage(ref result.Diameter);
-        // rowParser.Vector3(ref result.Direction);
-        // rowParser.Int(ref result.Color);
-        // rowParser.Int(ref result.OutlineColor);
-        // rowParser.Float(ref result.Fuzz);
-        // rowParser.Int(ref result.Outline);
-        // rowParser.Int(ref result.Group);
-        // rowParser.Int(ref result.Texture);
-        // return result;
-
+        
         // iterate trough all field names of class T
-
+        
         foreach (var field in result.GetType().GetFields())
         {
             var fieldName = field.Name;
